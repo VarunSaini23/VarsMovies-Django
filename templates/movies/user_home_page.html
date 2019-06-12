@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>My Collections : </h1>
+
+    <div class="row mt-4">
+
+        {% for result in json_result.results %}
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 mt-2">
+                        <a href="{% url 'movie_detail' result.id %}">
+                            <figure class="figure">
+                                <figcaption class="figure-caption"><h5>{{ result.title }}</h5></figcaption>
+                                {% if result.backdrop_path == None %}
+                                    <img src="{% static 'no-image-available.jpg' %}" alt="..."
+                                         class="figure-img img-fluid rounded">
+                                {% else %}
+                                    <img src="https://image.tmdb.org/t/p/w500{{ result.backdrop_path }}" alt="..."
+                                         class="figure-img img-fluid rounded">
+                                {% endif %}
+                                <figcaption class="figure-caption">{{ result.overview|truncatechars:100 }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}
