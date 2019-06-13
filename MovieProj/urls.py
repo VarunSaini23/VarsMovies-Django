@@ -21,7 +21,7 @@ from movies import views as movie_views
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('home/', movie_views.home, name="home"),
+                  path('', movie_views.home, name="home"),
                   path('movie/', include('movies.urls')),
                   path('accounts/', include('accounts.urls')),
                   path('@<slug:username>/', movie_views.user_home_page, name="user_home_page"),
