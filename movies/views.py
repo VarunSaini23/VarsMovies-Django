@@ -5,7 +5,7 @@ import requests
 from django.conf import settings
 import datetime
 
-from movies.models import Collection
+from movies.models import Collection, Comment
 
 TMDB_END_POINT = "https://api.themoviedb.org/3/"
 
@@ -33,7 +33,9 @@ def search(request, query):
 
 
 def detail(request, movie_id):
-    all_collection = request.user.collection_set.all()
+    all_collection = []
+    if request.user.is_authenticated:
+        all_collection = request.user.collection_set.all()
     all_collection_movie_id_list = []
     for i in all_collection:
         all_collection_movie_id_list.append(i.movie_id)
@@ -48,23 +50,16 @@ def detail(request, movie_id):
     listDates = rel_date.split("-")
     x = datetime.datetime(int(listDates[0]), int(listDates[1]), int(listDates[2]))
     formatted_rel_date = x.strftime("%b %d %Y")
+    comments = Comment.objects.filter(movie_id=movie_id)
     return render(request, 'movies/detail.html', {'results': result, 'formatted_rel_date': formatted_rel_date,
                                                   'result_video': result_video,
-                                                  'all_collection_movie_id_list': all_collection_movie_id_list})
-
-
-@login_required
-def add_to_collection(request, movie_id):
-    if request.method == "POST":
-        user = request.user
-        Collection.objects.create(user=user, movie_id=movie_id)
-    return redirect('movie_detail', movie_id)
+                                                  'all_collection_movie_id_list': all_collection_movie_id_list,
+                                                  "comments":comments})
 
 
 @login_required
 def user_home_page(request, username):
     collections = Collection.objects.filter(user=request.user)
-    print(collections[0].movie_id)
     results = []
     json_result = {}
     params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US'}
@@ -77,3 +72,27 @@ def user_home_page(request, username):
     print(json_result)
 
     return render(request, 'movies/user_home_page.html', {'json_result': json_result})
+
+
+@login_required
+def add_to_collection(request, movie_id):
+    if request.method == "POST":
+        user = request.user
+        Collection.objects.create(user=user, movie_id=movie_id)
+    return redirect('movie_detail', movie_id)
+
+
+@login_required
+def remove_from_collection(request, movie_id):
+    if request.method == "POST":
+        user = request.user
+        Collection.objects.filter(user=user, movie_id=movie_id).delete()
+    return redirect('movie_detail', movie_id)
+
+
+@login_required
+def add_comment(request, movie_id):
+    if request.method == "POST":
+        user = request.user
+        Comment.objects.create(comment_text=request.POST.get("comment_text"), uploaded_by=user, movie_id=movie_id)
+    return redirect('movie_detail', movie_id)
