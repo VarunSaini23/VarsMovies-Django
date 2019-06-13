@@ -24,8 +24,11 @@ def auth_login(request):
         username = request.POST.get('username')
         raw_password = request.POST.get('password')
         user = authenticate(username=username, password=raw_password)
-        login(request, user)
-        return redirect('user_home_page', request.user.username)
+        if(request.user.is_authenticated):
+            login(request, user)
+            return redirect('user_home_page', request.user.username)
+        else:
+            return redirect('signup')
     else:
         form = SignUpForm()
     return render(request, 'accounts/login.html', {'form': form})
