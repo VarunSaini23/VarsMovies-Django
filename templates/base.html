@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} VarsMoviessss{% endblock %}</title>
+    <title>{% block title %} VarsMovieS{% endblock %}</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <link href="{% static 'customcss/basecss.css' %}" rel="stylesheet"/>
@@ -20,9 +20,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Upcoming Movies <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Popular</a>
-                    <a class="nav-item nav-link" href="#">Genres</a>
+                    <a class="nav-item nav-link " href="{% url 'upcoming' %}">Upcoming Movies</a>
+                    <a class="nav-item nav-link" href="{% url 'popular' %}">Popular</a>
+{#                    <a class="nav-item nav-link" href="#">Genres</a>#}
                 </div>
                 <div class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}

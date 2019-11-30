@@ -16,6 +16,19 @@ def home(request):
         movie_name = request.POST.get('movie_name', None)
         return redirect('search', movie_name)
     else:
+        endpoint = TMDB_END_POINT + "movie/top_rated?"
+        params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US', 'page': 1}
+        response = requests.get(endpoint, params=params)
+        result = response.json()
+        print("url : " + response.url)
+        return render(request, "movies/home.html", {'results': result})
+
+
+def upcoming(request):
+    if request.method == 'POST':
+        movie_name = request.POST.get('movie_name', None)
+        return redirect('search', movie_name)
+    else:
         endpoint = TMDB_END_POINT + "movie/upcoming?"
         params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US', 'page': 1}
         response = requests.get(endpoint, params=params)
@@ -24,12 +37,26 @@ def home(request):
         return render(request, "movies/home.html", {'results': result})
 
 
+def popular(request):
+    if request.method == 'POST':
+        movie_name = request.POST.get('movie_name', None)
+        return redirect('search', movie_name)
+    else:
+        endpoint = TMDB_END_POINT + "movie/popular?"
+        params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US', 'page': 1}
+        response = requests.get(endpoint, params=params)
+        result = response.json()
+        print("url : " + response.url)
+        return render(request, "movies/home.html", {'results': result})
+
+
 def search(request, query):
-    endpoint = TMDB_END_POINT + "search/movie?"
-    params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US', 'page': 1, 'query': query}
-    response = requests.get(endpoint, params=params)
-    result = response.json()
-    return render(request, 'movies/home.html', {'results': result, 'prev_query': query})
+    if query != "":
+        endpoint = TMDB_END_POINT + "search/movie?"
+        params = {'api_key': settings.TMDB_API_KEY, "language": 'en-US', 'page': 1, 'query': query}
+        response = requests.get(endpoint, params=params)
+        result = response.json()
+        return render(request, 'movies/home.html', {'results': result, 'prev_query': query})
 
 
 def detail(request, movie_id):
@@ -54,7 +81,7 @@ def detail(request, movie_id):
     return render(request, 'movies/detail.html', {'results': result, 'formatted_rel_date': formatted_rel_date,
                                                   'result_video': result_video,
                                                   'all_collection_movie_id_list': all_collection_movie_id_list,
-                                                  "comments":comments})
+                                                  "comments": comments})
 
 
 @login_required
