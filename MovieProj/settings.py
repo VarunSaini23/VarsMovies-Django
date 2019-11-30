@@ -26,7 +26,7 @@ SECRET_KEY = 'u%aj9)o#s@^(eg&qxw=w5zk!smn_n!xswv&k*9h0l5!m-27tw*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://varsmovies.herokuapp.com/","127.0.0.1"]
 
 INSTALLED_APPS = [
     'accounts',
@@ -137,3 +137,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGOUT_REDIRECT_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'user_home_page'
+
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
