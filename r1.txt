@@ -1,0 +1,5 @@
+What 
+Bloom Filter and Cuckoo Filter both are probabilistic data structure which are very useful to process data when the data size is very large. It is used to test wheather the element is present in the given set. It tells us that the element either definitely is not in the set or may be in the set. Probabilistic data structure provide approximate answers to the queries. They store data compactly with low memory and provide a space-efficient manner to query the data.
+
+Why
+Probabilisitic data structures are particularly useful in low power settings. As such, they are extremely useful in big data situations like counting views on a Youtube video or maintaining a list of unique facebook posts in the past. According to data, it can count up to 7.9 billion unique items using 2.56KB of memory. Cuckoo filter is an advancement in the bloom filter as it enables dynamic deletion and addition of items and it can be easily implemented compared to Bloom filter variants with similar capabilities.
