@@ -15,6 +15,7 @@ def home(request):
     if request.method == 'POST':
         movie_name = request.POST.get('movie_name', None)
         if movie_name != '':
+
             movie_name = ''.join(movie_name.replace(" ", "_"))
             return redirect('search', movie_name)
         else:
