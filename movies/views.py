@@ -8,6 +8,7 @@ import datetime
 from movies.models import Collection, Comment
 
 TMDB_END_POINT = "https://api.themoviedb.org/3/"
+TMDB_API_KEY = "7da1ead276c45a0e2abd18144be5ea12"
 
 
 # Create your views here.
@@ -22,7 +23,7 @@ def home(request):
             return redirect('home')
     else:
         endpoint = TMDB_END_POINT + "movie/top_rated?"
-        params = {'api_key': settings.TMDB_API_KEY,
+        params = {'api_key': TMDB_API_KEY,
                   "language": 'en-US', 'page': 1}
         response = requests.get(endpoint, params=params)
         result = response.json()
