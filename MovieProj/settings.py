@@ -26,7 +26,7 @@ SECRET_KEY = 'u%aj9)o#s@^(eg&qxw=w5zk!smn_n!xswv&k*9h0l5!m-27tw*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://varsmovies.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['varsmovies.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     'accounts',
