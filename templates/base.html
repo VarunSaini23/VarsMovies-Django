@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} VarsMovieS{% endblock %}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
@@ -106,7 +106,7 @@
       {% endblock %} {% block content %}
       <div class="row mt-4">
         {% for result in results.results %}
-        <div class="col-md-4 mt-2">
+        <div class="col-xs-6 col-md-4 mt-2">
           <a href="{% url 'movie_detail' result.id %}">
             <figure class="figure">
               <figcaption class="figure-caption">
