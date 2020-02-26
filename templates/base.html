@@ -18,9 +18,11 @@
   <body class="animated fadeIn">
     {% block body %}
     <!-- <div class="container"> -->
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-md bg-transparent">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">VarsMovies</a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="{% static 'logo.jpg' %}" alt="..."
+        /></a>
 
         <button
           class="navbar-toggler"
