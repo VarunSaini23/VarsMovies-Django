@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
 
 <div class="m-5 row">
-  <div class="card m-auto m-5 col-md-4">
+  <div class="card m-auto m-5 col-md-4 col-lg-8">
     <div class="card-body">
       <form action="{% url 'signup' %}" method="post">
         {% csrf_token %} {{ form|crispy }}
