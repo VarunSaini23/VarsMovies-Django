@@ -18,7 +18,7 @@
   <body class="animated fadeIn">
     {% block body %}
     <!-- <div class="container"> -->
-    <nav class="navbar fixed-top navbar-expand-md bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">VarsMovies</a>
 
@@ -83,7 +83,7 @@
 
     <div class="container">
       {% block before_content %}
-      <form action="{% url 'home' %}" method="post">
+      <form action="{% url 'home' %}" method="post" class="mt-3">
         <div class="main mt-3">
           <div class="input-group">
             {% csrf_token %}
