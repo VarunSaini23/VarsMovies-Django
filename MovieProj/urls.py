@@ -18,14 +18,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from movies import views as movie_views
+from django.conf.urls import handler404
 
 urlpatterns = [
-                  path('admin/', admin.site.urls),
-                  path('', movie_views.home, name="home"),
-                  path('upcoming/', movie_views.upcoming, name="upcoming"),
-                  path('popular/', movie_views.popular, name="popular"),
-                  path('movie/', include('movies.urls')),
-                  path('accounts/', include('accounts.urls')),
-                  path('@<slug:username>/', movie_views.user_home_page, name="user_home_page"),
+    path('admin/', admin.site.urls),
+    path('', movie_views.home, name="home"),
+    path('upcoming/', movie_views.upcoming, name="upcoming"),
+    path('popular/', movie_views.popular, name="popular"),
+    path('movie/', include('movies.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('@<slug:username>/', movie_views.user_home_page, name="user_home_page"),
 
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
